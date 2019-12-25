@@ -113,6 +113,18 @@ public class node implements node_data{
 		this.Weight=Double.parseDouble( arr[4]);
 		this.Tag=this.key=Integer.parseInt( arr[5].substring(0, arr[5].length()-1));
 	}
+	
+	
+	@Override
+	public String toString() {
+		return "node [key=" + key + ", Location=" + Location + ", Weight=" + Weight + ", Info=" + Info + ", Tag=" + Tag
+				+ "]";
+	}
+
+
+
+
+
 	/**
 	 * Temporal data (aka color: e,g, white, gray, black) 
 	 * which can be used be algorithms 

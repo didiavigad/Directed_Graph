@@ -8,13 +8,13 @@ public class edge implements edge_data {
 	private double weight;
 	private int tag;
 	
-	public edge(int src,int dest) {
+	public edge(int src,int dest ,double w) {
 		
 		
 		this.src=src;
 		this.dest=dest;
-		//this.weight=weight;
-		//this.tag=tag;
+		this.weight=w;
+		//this.tag=tag;1
 	}
 	
 public edge(int src,int dest,double weight,int tag) {
@@ -95,6 +95,13 @@ String[] arr;
 		this.tag=Integer.parseInt( arr[3].substring(0, arr[3].length()-1));
 		
 	}
+	
+	
+	@Override
+	public String toString() {
+		return "edge [src=" + src + ", dest=" + dest + ", weight=" + weight + ", tag=" + tag + "]";
+	}
+
 	/**
 	 * Temporal data (aka color: e,g, white, gray, black) 
 	 * which can be used be algorithms 
