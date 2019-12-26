@@ -8,6 +8,16 @@ public class edge implements edge_data {
 	private double weight;
 	private int tag;
 	
+	
+public edge(int src,int dest ) {
+		
+		
+		this.src=src;
+		this.dest=dest;
+		//this.tag=tag;1
+	}
+	
+	
 	public edge(int src,int dest ,double w) {
 		
 		

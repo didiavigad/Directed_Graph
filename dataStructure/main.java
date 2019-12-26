@@ -39,22 +39,25 @@ public class main {
 		//edge_data e6 =new edge(2,0,6.576,4);
 		//edge_data e7 =new edge(3,4,12.4,2);
 		//edge_data e8 =new edge(4,5,71.65,3);
-g.connect(1,2,30.56);
+g.connect(0,2,30.56);
 g.connect(1,6,3.42);
-g.connect(1,3,15.87656);
-g.connect(6,4,0.56);
-g.connect(2,4,30.56);
+g.connect(6,3,15.87656);
+g.connect(5,2,0.56);
+g.connect(2,1,30.56);
 g.connect(1,5,30.56);
-//System.out.println(g.nodeSize());
+//g.getE(1);
+//System.out.println(g.getE(1));
+//System.out.println(g.getV());
 //System.out.println(g.getNode(1));
+//g.removeEdge(6, 3);
 g.removeNode(1);
-
+g.removeEdge(6, 3);
 g.getMC();
-
-//System.out.println(g.nodeSize());
+g.edgeSize();
+System.out.println(g.edgeSize());
 //System.out.println(g.getNode(1));
 
-//System.out.println(g.getEdge(1,3));
+System.out.println(g.getEdge(1,6));
 //System.out.println("////"+g.rem);
 //System.out.println(g.edgeSize());
 
