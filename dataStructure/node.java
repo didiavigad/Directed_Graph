@@ -1,8 +1,10 @@
 package dataStructure;
 
+import java.io.Serializable;
+
 import utils.Point3D;
 
-public class node implements node_data{
+public class node implements node_data,Serializable{
 	private int key;//מפתח שמציין את הקודקוד החדש
 	private Point3D Location ;//מיקום אנקודה 
 	private double Weight;//משקל הנקודה

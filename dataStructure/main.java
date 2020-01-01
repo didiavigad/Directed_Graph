@@ -7,7 +7,14 @@ public class main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//src=
-		DGraph g = new DGraph();
+	
+		
+		 
+		 
+		 
+		 
+		 
+		 DGraph g = new DGraph();
 		node_data n1= new node(0,new Point3D(1,2,3),20,10);
 		node_data n2= new node(1,new Point3D(1,2,4),1,10);
 		node_data n3= new node(2,new Point3D(1,6,5),23,10);
@@ -24,6 +31,8 @@ public class main {
 		g.addNode(n5);
 		g.addNode(n6);
 		g.addNode(n7);
+		g.addNode(n8);
+
 		//System.out.println(n1.getKey());
 		//System.out.println(n7.getKey());
 		//System.out.println(n3.getKey());
@@ -39,25 +48,37 @@ public class main {
 		//edge_data e6 =new edge(2,0,6.576,4);
 		//edge_data e7 =new edge(3,4,12.4,2);
 		//edge_data e8 =new edge(4,5,71.65,3);
-g.connect(0,2,30.56);
-g.connect(1,6,3.42);
-g.connect(6,3,15.87656);
-g.connect(5,2,0.56);
-g.connect(2,1,30.56);
-g.connect(1,5,30.56);
+//g.connect(3,2,30.56);
+//g.connect(1,6,3.42);
+g.connect(6,1,15.87656);//!!!
+//g.connect(5,2,0.56);
+//g.connect(1,3,30.56);
+g.connect(1,2,30.56);//
+g.connect(6,2,30.56);//
+g.connect(5,6,30.56);
+g.connect(6,1,30.56);//!!!!
+g.connect(2,1,30.56);//!!!!!
+g.connect(3,3,30.56);//!!!
+
+g.connect(6,3,30.56);//!!!!!@
+
+System.out.println(g.nodeSize());
 //g.getE(1);
-//System.out.println(g.getE(1));
+//System.out.println(g.getE(6));
 //System.out.println(g.getV());
 //System.out.println(g.getNode(1));
 //g.removeEdge(6, 3);
-g.removeNode(1);
-g.removeEdge(6, 3);
-g.getMC();
-g.edgeSize();
-System.out.println(g.edgeSize());
+//g.removeNode(1);
+//g.addNode(n2);
+//g.connect(1,3,30.56);
+//System.out.println("cccc " +g.edgeSize());
+//g.removeEdge(6, 3);
+//g.getMC();
+//g.edgeSize();
+//System.out.println(g.edgeSize());
 //System.out.println(g.getNode(1));
 
-System.out.println(g.getEdge(1,6));
+//System.out.println(g.getEdge(1,6));
 //System.out.println("////"+g.rem);
 //System.out.println(g.edgeSize());
 

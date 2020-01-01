@@ -1,15 +1,18 @@
 package dataStructure;
 
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 
-public class DGraph implements graph{
+
+public class DGraph implements graph,Serializable{
 	private int  sizeOfEdge=0;
 	private int count=0;
-	private  Map<Integer, node_data> _data  = new HashMap<>(); 
+	private  HashMap<Integer, node_data> _data  = new HashMap<>(); 
 	private HashMap<Integer, HashMap<Integer, edge_data>> _edgeData = new HashMap<>() ;
 
 	/**
@@ -59,7 +62,6 @@ public class DGraph implements graph{
 	public void addNode(node_data n) {
 		int k=n.getKey();
 		_data.put(k, n);
-		_edgeData.put(k, new HashMap<Integer,edge_data>());
 		this.count++;
 	}
 	/**
@@ -69,13 +71,23 @@ public class DGraph implements graph{
 	 * @param dest - the destination of the edge.
 	 * @param w - positive weight representing the cost (aka time, price, etc) between src-->dest.
 	 */
-
+	
+		
 	@Override
 	public void connect(int src, int dest, double w) {
+		
+		if(!_edgeData.containsKey(src)) {
+			_edgeData.put(src, new HashMap<Integer,edge_data>());
 		_edgeData.get(src).put(dest,new edge(src, dest, w));
-		this.sizeOfEdge++;
+		 this.sizeOfEdge++;
+		}
+		else {
+			_edgeData.get(src).put(dest,new edge(src, dest, w));	
+			this.sizeOfEdge++;
+		}
+		
 		this.count++;
-
+      // System.out.println(_edgeData);
 
 	}
 	/**
@@ -99,8 +111,10 @@ public class DGraph implements graph{
 	 */
 	@Override
 	public Collection<edge_data> getE(int node_id) {
-
+		if(_edgeData.get(node_id)!=null)
 		return _edgeData.get(node_id).values();
+		else 
+			return null;
 	}
 	/**
 	 * Delete the node (with the given ID) from the graph -
@@ -114,32 +128,23 @@ public class DGraph implements graph{
 
 	@Override
 	public node_data removeNode(int key) {
-		System.out.println(sizeOfEdge);
-		for (int i = 0; i < _edgeData.size() ; i++) {
-			if(i!=key){
-				if(_edgeData.get(i).get(key)!=null) {
-					_edgeData.get(i).remove(key);
-					this.count++;	
-
-				}
-
-				if(_edgeData.get(i).isEmpty()) {
-					this.sizeOfEdge--;
-
-
-				}
-
-			}  
-
-		}
-		//System.out.println(sizeOfEdge);
+		
+		for ( Integer i: _edgeData.keySet() ) {
+			if(_edgeData.get(i).containsKey(key)) {
+			_edgeData.get(i).remove(key);
+			this.sizeOfEdge--;
+			}
+		}	
+		this.sizeOfEdge =this.sizeOfEdge -_edgeData.get(key).size();
 		_edgeData.remove(key);
 		node_data node =_data.get(key);
 		_data.remove(key);
+		System.out.println(_edgeData);
 		return  node;
-
-
 	}
+
+
+	
 
 	@Override
 	public edge_data removeEdge(int src, int dest) {
@@ -150,7 +155,6 @@ public class DGraph implements graph{
 			_edgeData.get(src).remove(dest);
 			this.sizeOfEdge--;
 			this.count++;
-			System.out.println(sizeOfEdge);
 			return edgeD;
 		}
 
@@ -174,7 +178,7 @@ public class DGraph implements graph{
 	 */
 	@Override
 	public int getMC() {
-		//System.out.println(_connect);
+		
 		return this.count;
 	}
 }

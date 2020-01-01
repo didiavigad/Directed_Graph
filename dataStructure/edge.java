@@ -1,8 +1,8 @@
 package dataStructure;
 
+import java.io.Serializable;
 
-
-public class edge implements edge_data {
+public class edge implements edge_data,Serializable{
 	private int src;
 	private int dest;
 	private double weight;
@@ -14,7 +14,7 @@ public edge(int src,int dest ) {
 		
 		this.src=src;
 		this.dest=dest;
-		//this.tag=tag;1
+		
 	}
 	
 	
@@ -90,14 +90,10 @@ public edge(int src,int dest,double weight,int tag) {
 	 * @param s
 	 */
 	
-	//private int src;
-	//private int dest;
-	//private double weight;
-	//private int tag;
-	@Override
+	
 	public void setInfo(String s) {
 String[] arr;
-		//get (src,dest,weight,tag)
+		
 		arr =  s.split(",");		
 		this.src=Integer.parseInt( arr[0].substring(1, arr[0].length()));
 		this.dest= Integer.parseInt( arr[1]);
@@ -131,5 +127,6 @@ String[] arr;
 		this.tag=t;
 		
 	}
+
 
 }
