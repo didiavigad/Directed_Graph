@@ -111,8 +111,10 @@ public class DGraph implements graph,Serializable{
 	 */
 	@Override
 	public Collection<edge_data> getE(int node_id) {
+	//	System.out.println( _edgeData.get(node_id).values());
 		if(_edgeData.get(node_id)!=null)
-		return _edgeData.get(node_id).values();
+		
+			return _edgeData.get(node_id).values();
 		else 
 			return null;
 	}

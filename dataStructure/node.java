@@ -8,7 +8,7 @@ public class node implements node_data,Serializable{
 	private int key;//מפתח שמציין את הקודקוד החדש
 	private Point3D Location ;//מיקום אנקודה 
 	private double Weight;//משקל הנקודה
-	private String Info;//הצגת כול הנתונים של הנקודה כלומר מיקום משקל 
+	private String Info="";//הצגת כול הנתונים של הנקודה כלומר מיקום משקל 
 	private int Tag;
 
 	public node(int k,Point3D l,double w,int t) {
@@ -19,6 +19,23 @@ public class node implements node_data,Serializable{
 
 
 
+	}
+
+
+
+
+
+	public node(int i) {
+		this.key=i; 
+	}
+
+
+
+
+
+	public node(int i, Point3D p) {
+		this.key=i;
+		this.Location=p;
 	}
 
 
@@ -90,8 +107,8 @@ public class node implements node_data,Serializable{
 	 */
 	@Override
 	public String getInfo() {
-
-		return"The key is:"+ this.key+"\n"+"The Location is:"+this.Location.toString()+"\n"+"The weight is:"+this.Weight+"\n"+"The tag is:"+this.Tag;
+		return this.Info;
+		//return"The key is:"+ this.key+"\n"+"The Location is:"+this.Location.toString()+"\n"+"The weight is:"+this.Weight+"\n"+"The tag is:"+this.Tag;
 	}
 
 
@@ -102,18 +119,22 @@ public class node implements node_data,Serializable{
 //לבדוק אם נקבל סטרינג מהצורה (key,(Location),weight,tag)
 	@Override
 	public void setInfo(String s) {
-		String[] arr;
+//		String[] arr;
+//
+//		
+//		//get (key,(Location),weight,tag)
+//		arr =  s.split(" ");		
+//		this.key=Integer.parseInt( arr[0].substring(1, arr[0].length()));
+//		double x = Double.parseDouble( arr[1].substring(1, arr[1].length())); 
+//		double y =Double.parseDouble( arr[2]); 
+//		double z=Double.parseDouble(arr[3].substring(0, arr[3].length()-1)); 
+//		this.Location= new Point3D(x,y,z);
+//		this.Weight=Double.parseDouble( arr[4]);
+//		this.Tag=this.key=Integer.parseInt( arr[5].substring(0, arr[5].length()-1));
+	
+		this.Info=s;
 
-		
-		//get (key,(Location),weight,tag)
-		arr =  s.split(",");		
-		this.key=Integer.parseInt( arr[0].substring(1, arr[0].length()));
-		double x = Double.parseDouble( arr[1].substring(1, arr[1].length())); 
-		double y =Double.parseDouble( arr[2]); 
-		double z=Double.parseDouble(arr[3].substring(0, arr[3].length()-1)); 
-		this.Location= new Point3D(x,y,z);
-		this.Weight=Double.parseDouble( arr[4]);
-		this.Tag=this.key=Integer.parseInt( arr[5].substring(0, arr[5].length()-1));
+	
 	}
 	
 	
