@@ -199,15 +199,10 @@ public class Graph_Algo implements graph_algorithms{
 
 
 
-	/**
-	 * Returns true if and only if (iff) there is a valid path from EVREY node to each
-	 * other node. NOTE: assume directional graph - a valid path (a-->b) does NOT imply a valid path (b-->a).
-	 * @return
-	 */
-	@Override
 	public double shortestPathDist(int src, int dest) {
 		List<node_data> shortListDist  = new LinkedList<node_data>();
 		shortListDist = shortestPath(src, dest);
+<<<<<<< HEAD
 		if (shortListDist.size()==0) {
 			return Double.POSITIVE_INFINITY;
 		}
@@ -215,10 +210,17 @@ public class Graph_Algo implements graph_algorithms{
 		for (node_data node: shortListDist) {
 			
 			dist+= node.getWeight();
+=======
+		if (shortListDist.size()==0) return Double.POSITIVE_INFINITY;
+		double dist =0;
+		for (node_data node: shortListDist) {
+			dist= dist + node.getWeight();
+>>>>>>> 6c61fce51c9ab0e2a9510436ad274ad5dd059f90
 		}
 		return dist;
 	}
 
+<<<<<<< HEAD
 	
 	/**
 	 * returns the length of the shortest path between src to dest
@@ -229,11 +231,19 @@ public class Graph_Algo implements graph_algorithms{
 	@Override
 	public List<node_data> shortestPath(int src, int dest) {
 		for (node_data node: this._graph.getV()) {
+=======
+	@Override
+	public List<node_data> shortestPath(int src, int dest) {
+		// TODO Auto-generated method stub
+	
+		for (node_data node: this.gAlgo.getV()) {
+>>>>>>> 6c61fce51c9ab0e2a9510436ad274ad5dd059f90
 			node.setWeight(Double.POSITIVE_INFINITY); // set weight infinity
 			node.setTag(0); // set unvisitied
 		}
 		
 		
+<<<<<<< HEAD
 		_graph.getNode(src).setWeight(0.);
 		_graph.getNode(src).setInfo(src +"");
 		LinkedList<node_data> list_short = new LinkedList<node_data>() ;
@@ -278,6 +288,44 @@ public class Graph_Algo implements graph_algorithms{
 			list.add(node);
 			}
 			}
+=======
+		gAlgo.getNode(src).setWeight(0.);
+		gAlgo.getNode(src).setInfo(src +" ");
+		LinkedList<node_data> list_short = new LinkedList<node_data>() ;
+		Comparator_list comp = new Comparator_list();
+		//insert all nodes
+		for (node_data node: this.gAlgo.getV()) {
+			list_short.add(node);
+		}
+		
+		while (gAlgo.getNode(dest).getTag()==0 && list_short.size()!=0) {
+			list_short.sort(comp);
+			node_data first = list_short.get(0);
+			for (edge_data edge : gAlgo.getE(first.getKey())) {
+				node_data vEdge = gAlgo.getNode(edge.getDest());
+				if (vEdge.getTag()==0) {
+					double minEdge = first.getWeight()+edge.getWeight();
+					if (minEdge<vEdge.getWeight()) {
+						vEdge.setInfo(first.getInfo()+ " " + vEdge.getInfo());
+						vEdge.setWeight(minEdge);
+					}
+				}
+			}
+			first.setTag(1);
+			list_short.remove(0);
+		}
+		
+		// until here its algorithm
+		
+		String str = gAlgo.getNode(dest).getInfo();
+		String [] strArr = str.split(" ");
+		LinkedList<node_data> list = new LinkedList<node_data>();
+		for (int i = 0; i < strArr.length; i++) {
+			int key = Integer.parseInt(strArr[i]);
+			node_data node = gAlgo.getNode(key);
+			list.add(node);
+		}
+>>>>>>> 6c61fce51c9ab0e2a9510436ad274ad5dd059f90
 		return list;
 	
 	}
@@ -288,6 +336,7 @@ public class Graph_Algo implements graph_algorithms{
 			return (int)(o1.getWeight()-o2.getWeight());
 		}
 		
+<<<<<<< HEAD
 	}	
 	
 	
@@ -304,6 +353,13 @@ public class Graph_Algo implements graph_algorithms{
 	public List<node_data> TSP(List<Integer> targets) {
 		List<node_data> TSP_list = new LinkedList<node_data>();
 		node_data src  = _graph.getNode(targets.get(0));
+=======
+	}
+	@Override
+	public List<node_data> TSP(List<Integer> targets) {
+		List<node_data> TSP_list = new LinkedList<node_data>();
+		node_data src  = gAlgo.getNode(targets.get(0));
+>>>>>>> 6c61fce51c9ab0e2a9510436ad274ad5dd059f90
 		if (targets.size()==1)  {
 			TSP_list.add(src);
 			return TSP_list;
@@ -311,7 +367,11 @@ public class Graph_Algo implements graph_algorithms{
 		for (int i = 0; i < targets.size()-1; i++) {
 			
 			int dest = targets.get(i+1);
+<<<<<<< HEAD
 			node_data node = _graph.getNode(dest);
+=======
+			node_data node = gAlgo.getNode(dest);
+>>>>>>> 6c61fce51c9ab0e2a9510436ad274ad5dd059f90
 			if (TSP_list.contains(node)) i++;
 			
 			List<node_data> listPath = shortestPath(i, i+1);
@@ -320,6 +380,7 @@ public class Graph_Algo implements graph_algorithms{
 		}
 		return TSP_list;
 	}
+<<<<<<< HEAD
 	
 	/**
 	 * computes a relatively short path which visit each node in the targets List.
@@ -329,6 +390,9 @@ public class Graph_Algo implements graph_algorithms{
 	 * @param targets
 	 * @return
 	 */
+=======
+
+>>>>>>> 6c61fce51c9ab0e2a9510436ad274ad5dd059f90
 	@Override
 	public graph copy() {
 		Graph_Algo g = new Graph_Algo(_graph) ;
