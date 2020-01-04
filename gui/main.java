@@ -57,9 +57,16 @@ public class main {
         //StdDraw.line(0.2, 0.2, 0.8, 0.2);
 	
 	
-	    Graph_GUI g1= new Graph_GUI(g);
-	g1.drawGraph(g);
-	//g1.save("fddr.jpg");
+	   Graph_GUI g1= new Graph_GUI(g);
+	
+	   // Graph_GUI g1 = new Graph_GUI();
+	   // g1.setVisible(true);
+	    
+	  //  g1.drawGraph(g);
+	
+	   //g1.shortestPath(1, 7);
+	    
+	    //g1.save("fddr.jpg");
 	}
 
 }

@@ -34,7 +34,7 @@ import dataStructure.node_data;
  */
 
 public class Graph_Algo implements graph_algorithms{
-	
+
 	private graph _graph;
 
 	public Graph_Algo (graph g){
@@ -190,18 +190,10 @@ public class Graph_Algo implements graph_algorithms{
 
 
 
-
-
-
-
-
-
-
-
-
 	/**
-	 * Returns true if and only if (iff) there is a valid path from EVREY node to each
-	 * other node. NOTE: assume directional graph - a valid path (a-->b) does NOT imply a valid path (b-->a).
+	 * returns the length of the shortest path between src to dest
+	 * @param src - start node
+	 * @param dest - end (target) node
 	 * @return
 	 */
 	@Override
@@ -213,15 +205,17 @@ public class Graph_Algo implements graph_algorithms{
 		}
 		double dist =0;
 		for (node_data node: shortListDist) {
-			
+
 			dist+= node.getWeight();
 		}
 		return dist;
 	}
 
-	
+
 	/**
-	 * returns the length of the shortest path between src to dest
+	 * returns the the shortest path between src to dest - as an ordered List of nodes:
+	 * src--> n1-->n2-->...dest
+	 * see: https://en.wikipedia.org/wiki/Shortest_path_problem
 	 * @param src - start node
 	 * @param dest - end (target) node
 	 * @return
@@ -232,8 +226,8 @@ public class Graph_Algo implements graph_algorithms{
 			node.setWeight(Double.POSITIVE_INFINITY); // set weight infinity
 			node.setTag(0); // set unvisitied
 		}
-		
-		
+
+
 		_graph.getNode(src).setWeight(0.);
 		_graph.getNode(src).setInfo(src +"");
 		LinkedList<node_data> list_short = new LinkedList<node_data>() ;
@@ -247,39 +241,39 @@ public class Graph_Algo implements graph_algorithms{
 			node_data first = list_short.get(0);
 			if(_graph.getE(first.getKey())!=null) {
 				for (edge_data edge : _graph.getE(first.getKey())) {
-				node_data vEdge = _graph.getNode(edge.getDest());
-				if (vEdge.getTag()==0) {
-					double minEdge = first.getWeight()+edge.getWeight();
-				     	
-				    
-				       if (minEdge<vEdge.getWeight()) {
-						
-						vEdge.setInfo(first.getInfo()+" "+ vEdge.getKey());
-						vEdge.setWeight(edge.getWeight());
-				       }
+					node_data vEdge = _graph.getNode(edge.getDest());
+					if (vEdge.getTag()==0) {
+						double minEdge = first.getWeight()+edge.getWeight();
+
+
+						if (minEdge<vEdge.getWeight()) {
+
+							vEdge.setInfo(first.getInfo()+" "+ vEdge.getKey());
+							vEdge.setWeight(edge.getWeight());
+						}
+					}
 				}
-			}
-			
+
 			}
 			first.setTag(1);
 			list_short.remove(0);
-			
-			}
+
+		}
 		// until here its algorithm
-		
+
 		String str = _graph.getNode(dest).getInfo();
 		String [] strArr = str.split(" ");
 		LinkedList<node_data> list = new LinkedList<node_data>();
 		for (int i = 0; i < strArr.length; i++) {
 			if(!strArr[i].isEmpty()) {
 				int key = Integer.parseInt(strArr[i]);
-			
-			node_data node = _graph.getNode(key);
-			list.add(node);
+
+				node_data node = _graph.getNode(key);
+				list.add(node);
 			}
-			}
+		}
 		return list;
-	
+
 	}
 	class Comparator_list implements Comparator<node_data>{
 
@@ -287,16 +281,16 @@ public class Graph_Algo implements graph_algorithms{
 		public int compare(node_data o1, node_data o2) {
 			return (int)(o1.getWeight()-o2.getWeight());
 		}
-		
+
 	}	
-	
-	
+
+
 	/**
-	 * returns the the shortest path between src to dest - as an ordered List of nodes:
-	 * src--> n1-->n2-->...dest
-	 * see: https://en.wikipedia.org/wiki/Shortest_path_problem
-	 * @param src - start node
-	 * @param dest - end (target) node
+	 * computes a relatively short path which visit each node in the targets List.
+	 * Note: this is NOT the classical traveling salesman problem, 
+	 * as you can visit a node more than once, and there is no need to return to source node - 
+	 * just a simple path going over all nodes in the list. 
+	 * @param targets
 	 * @return
 	 */
 
@@ -309,24 +303,20 @@ public class Graph_Algo implements graph_algorithms{
 			return TSP_list;
 		}
 		for (int i = 0; i < targets.size()-1; i++) {
-			
+
 			int dest = targets.get(i+1);
 			node_data node = _graph.getNode(dest);
 			if (TSP_list.contains(node)) i++;
-			
+
 			List<node_data> listPath = shortestPath(i, i+1);
-			
+
 			TSP_list.addAll(listPath);	
 		}
 		return TSP_list;
 	}
-	
-	/**
-	 * computes a relatively short path which visit each node in the targets List.
-	 * Note: this is NOT the classical traveling salesman problem, 
-	 * as you can visit a node more than once, and there is no need to return to source node - 
-	 * just a simple path going over all nodes in the list. 
-	 * @param targets
+
+	/** 
+	 * Compute a deep copy of this graph.
 	 * @return
 	 */
 	@Override
@@ -339,12 +329,12 @@ public class Graph_Algo implements graph_algorithms{
 			Collection<edge_data> edges = _graph.getE(n.getKey());
 			for (edge_data edge : edges) {
 				((graph) g).connect(edge.getSrc(), edge.getDest(), edge.getWeight());
-			
+
 			}
 		}
 		return (graph)g;
 	}
-	
+
 
 	/////private metode.
 	private  HashMap<Integer, Boolean> _vis  = new HashMap<>(); 
@@ -352,8 +342,8 @@ public class Graph_Algo implements graph_algorithms{
 	private ArrayList<ArrayList<Integer>> sccComp = new ArrayList<ArrayList<Integer>>();
 	private HashMap<Integer,Integer > low  = new HashMap<>(); 
 	private int count;
-	
-	
-	
-	
+
+
+
+
 }
