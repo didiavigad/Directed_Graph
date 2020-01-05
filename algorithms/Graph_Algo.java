@@ -308,7 +308,7 @@ public class Graph_Algo implements graph_algorithms{
 			node_data node = _graph.getNode(dest);
 			if (TSP_list.contains(node)) i++;
 
-			List<node_data> listPath = shortestPath(i, i+1);
+			List<node_data> listPath = shortestPath(targets.get(i), targets.get(i+1));
 
 			TSP_list.addAll(listPath);	
 		}
