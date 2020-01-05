@@ -307,11 +307,11 @@ public class Graph_Algo implements graph_algorithms{
 			int dest = targets.get(i+1);
 			node_data node = _graph.getNode(dest);
 			if (TSP_list.contains(node)) i++;
-
+			else{
 			List<node_data> listPath = shortestPath( targets.get(i),  targets.get(i+1));
 
 			TSP_list.addAll(listPath);	
-		}
+		}}
 		return TSP_list;
 	}
 
